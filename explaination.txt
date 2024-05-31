@@ -1,0 +1,69 @@
+We need custom user model to extend/add functionality or fields according to needs.
+
+Do we have to write code into models.py
+if UserManager == seperate db for the app_name
+####################################################################################################################
+Steps:
+1. import "from django.contrib.auth.models import AbstractBaseUser, BaseUserManager" if UserManager == seperate db for the app_name
+2. create class by inhertitng "BaseUserManager"  (only for regular_user and super_user)
+3. create class by inhertitng "AbstractBaseUser"
+####################################################################################################################
+
+
+####################################################################################################################
+Important Notes.
+-> for class inhertitng "BaseUserManager" we must declare only methods not fileds. Method can be "BaseUserManager" or "AbstractBaseUser" or both as per requirements. General Syntax: class UserManager(BaseUserManager):
+
+-> for class inhertitng "AbstractBaseUser" we declare fields here. General Syntax: class User(AbstractBaseUser):
+####################################################################################################################
+
+
+
+####################################################################################################################
+Details Descriptions class inhertitng "BaseUserManager"
+->BaseUserManager === allows to editd user and super_user
+-> we declare "def create_user(self,first_name,last_name,username,email,password=None)"
+-> to check if provided, conditions met.
+
+=> "user = self.model(
+            email = self.normalize_email(email),
+            username = username,
+            first_name = first_name,
+            last_name = last_name,
+        )"  
+
+        -> this piece of code will pass value/take value
+        -> self.normalize_email(email) => it will turn uppercase email to lower
+=> "user.set_password(password)
+        user.save(using = self.db)
+        return user"
+
+        -> it will save encoded password and save to db
+        -> using = self.db => django default uses using parameter to define which db maneger should uses (if multiple)
+
+=> "def create_superuser(self,first_name,last_name,username,email,password=None):
+        user = self.create_user()" 
+
+
+        -> same parameter as create_user because we only need to call as we already declared to creat user and here we can assign role type, permission type, such...
+
+    "user.is_admin = True
+        user.is_active = True
+        user.is_staff = True
+        user.is_superadmin = True"
+
+        -> to set admin rights
+
+
+Additional*
+    -> AbstractUser: not full control, only adding of fileds
+####################################################################################################################
+####################################################################################################################
+
+
+
+
+####################################################################################################################
+Details Descriptions class inhertitng "AbstractBaseUser"
+
+-> By inhertitng this extends in user class and taking full control of editing custom model including Auth functionality of django.
