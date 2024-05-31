@@ -3,9 +3,10 @@ from django.contrib.auth import login, logout, authenticate
 from authuser.models import User
 from django.contrib.auth.hashers import make_password
 from authuser.forms import LoginForm, UserRegistrationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+# @login_required
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)

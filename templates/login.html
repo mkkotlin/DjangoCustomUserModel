@@ -10,8 +10,6 @@
 
     {% if user.is_authenticated %}
         Hello {{name}} you are logged<br>
-        <form action="{% url 'logout' %}" method="post"></form>
-        <button type="submit">Logout</button>
         <a href="{% url 'logout' %}">logout</a>
     {% else %}
     <form method="post">
