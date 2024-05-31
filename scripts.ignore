@@ -1,0 +1,15 @@
+python -m venv venv ==> to craete v_env
+venv\Scripts\Activate.ps1 ==> to Activate even on windows
+. venv/bin/activate ==> on bash
+pip install -r requirements.txt ==> to install requirements.txt
+
+python manage.py migrate ==> to write to db
+python manage.py makemigrations ==> migration file
+python manage.py shell ==> to start shell
+
+git add -A ==> add all changes
+git commit -a -m 'ok' ==> run 1st
+git push origin ==> run 2nd
+git puch -u -f origin
+git commit -m 'variable message'
+git commit -a
